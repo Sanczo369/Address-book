@@ -3,19 +3,29 @@ from PIL import ImageTk, Image
 def main():
     # root Option
     root = Tk()
-    root.title("Address Book")
+    root.title("Address")
     root.iconbitmap("icona.ico")
-
+    root.config(padx=3,pady=2)
+    logo1 = ImageTk.PhotoImage(Image.open("logo1.png"))
+    logo2 = ImageTk.PhotoImage(Image.open("logo2.png"))
+    logo3 = ImageTk.PhotoImage(Image.open("logo3.png"))
+    logo4 = ImageTk.PhotoImage(Image.open("logo4.png"))
     # Window Menu
     mainMenu = Menu()
     root.config(menu=mainMenu)
-    fileMenu = Menu(mainMenu)
-    mainMenu.add_cascade(label="File", menu=fileMenu)
-    logo = ImageTk.PhotoImage(Image.open("logo.png"))
+    file_menu = Menu(mainMenu)
+    mainMenu.add_cascade(label="File", menu=file_menu)
+    edit_menu = Menu(mainMenu)
+    mainMenu.add_cascade(label="Edit", menu=edit_menu)
 
     # Add elements
-    head = Label(root, text=" Adress Book", font=("Arial",20))
-    logo_label= Label(root, image=logo)
+
+    logo_frame = LabelFrame(root)
+    head = Label(logo_frame, text=" Adress Book", font=("Comic Sans MS", 20, "bold"))
+    logo0_label= Label(logo_frame, image=logo1)
+    logo1_label= Label(logo_frame, image=logo2)
+    logo2_label= Label(logo_frame, image=logo3)
+    logo3_label= Label(logo_frame, image=logo4)
     name_label = Label(root, text="Imie")
     name_entry = Entry(root)
     second_name_label = Label(root, text="Drugie Imie")
@@ -39,9 +49,13 @@ def main():
     clear_btn=Button(root, text="Clear")
 
     # Element Position
+    logo_frame.grid(row=1, columnspan=2)
+    head.grid(row=0, column=2, columnspan=4)
+    logo0_label.grid(row=0, column=0)
+    logo1_label.grid(row=0, column=1)
+    logo2_label.grid(row=0, column=6)
+    logo3_label.grid(row=0, column=7)
 
-    head.grid(row=0, columnspan=2)
-    logo_label.grid(row=1, columnspan=2)
     name_label.grid(row=2, column=0)
     name_entry.grid(row=2, column=1)
     second_name_label.grid(row=3, column=0)
