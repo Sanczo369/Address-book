@@ -1,5 +1,6 @@
 # Address-book
-## Aplikacja Towrzy książkę adresową zapisaną w pliku .db
+Aplikacja Towrzy książkę adresową zapisaną w pliku .db
+
 ## Zbieranie Dane
 - Imię
 - Drugie Imię
