@@ -25,7 +25,9 @@ def query():
     c = conn.cursor()
     c.execute("SELECT *, oid FROM addresses")
     records = c.fetchall()
-    print(records)
+
+    for record in records:
+        print_records += str(record[0])+" "
     conn.commit()
     conn.close()
 def clear():
@@ -50,7 +52,7 @@ def main():
     global zipcode_entry
     global adress_email_entry
     global phone_number_entry
-
+    global print_records
     # create Table with addresses in addresses.db file
     # conn=sqlite3.connect('address.db')
     # c=conn.cursor()
@@ -83,7 +85,7 @@ def main():
     mainMenu.add_cascade(label="File", menu=file_menu)
     edit_menu = Menu(mainMenu)
     mainMenu.add_cascade(label="Edit", menu=edit_menu)
-
+    print_records=""
     # Add elements
     logo_frame = LabelFrame(root)
     head = Label(logo_frame, text=" Adress Book", font=("Comic Sans MS", 20, "bold"))
@@ -120,6 +122,7 @@ def main():
     edit_btn=Button(root, text="Edit",width=19)
     delete_btn=Button(root, text="Delete",width=19)
     show_btn=Button(root, text="Show", width=42, command=query)
+    quary_label = Label(root, text=print_records)
 
     # Element Position
     logo_frame.grid(row=1, columnspan=2)
@@ -156,7 +159,7 @@ def main():
     edit_btn.grid(row=14, column=0)
     delete_btn.grid(row=14, column=1)
     show_btn.grid(row=15, columnspan=2)
-
+    quary_label.grid(row=16, columnspan=2)
 
 
 
