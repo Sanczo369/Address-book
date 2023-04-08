@@ -44,10 +44,11 @@ def main():
     adress_email_entry = Entry(root)
     phone_number_label = Label(root, text="Numer Telefonu")
     phone_number_entry = Entry(root)
+    var=IntVar()
+    regulamin= Checkbutton(root, text="Akceptuje regulamin", variable=var)
 
     submit_btn=Button(root, text="Submit")
     clear_btn=Button(root, text="Clear")
-
     # Element Position
     logo_frame.grid(row=1, columnspan=2)
     head.grid(row=0, column=2, columnspan=4)
@@ -74,9 +75,10 @@ def main():
     adress_email_entry.grid(row=9, column=1)
     phone_number_label.grid(row=10, column=0)
     phone_number_entry.grid(row=10, column=1)
+    regulamin.grid(row=11, columnspan=2)
 
-    submit_btn.grid(row=11, column=0)
-    clear_btn.grid(row=11, column=1)
+    submit_btn.grid(row=12, column=0)
+    clear_btn.grid(row=12, column=1)
 
 
 
