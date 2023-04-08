@@ -108,6 +108,12 @@ def main():
     regulamin.deselect()
     submit_btn=Button(root, text="Submit", command=submit)
     clear_btn=Button(root, text="Clear", command=clear)
+    id_label = Label(root, text="ID:")
+    id_entry = Entry(root)
+    edit_btn=Button(root, text="Edit",width=19)
+    delete_btn=Button(root, text="Delete",width=19)
+    show_btn=Button(root, text="Show", width=42)
+
     # Element Position
     logo_frame.grid(row=1, columnspan=2)
     head.grid(row=0, column=2, columnspan=4)
@@ -138,7 +144,11 @@ def main():
 
     submit_btn.grid(row=12, column=0)
     clear_btn.grid(row=12, column=1)
-
+    id_label.grid(row=13, column=0)
+    id_entry.grid(row=13, column=1)
+    edit_btn.grid(row=14, column=0)
+    delete_btn.grid(row=14, column=1)
+    show_btn.grid(row=15, columnspan=2)
 
 
 
