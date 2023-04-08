@@ -1,10 +1,32 @@
 from tkinter import *
 from PIL import ImageTk, Image
+def clear():
+    name_entry.delete(0, END)
+    second_name_entry.delete(0, END)
+    name_entry.delete(0, END)
+    second_name_entry.delete(0, END)
+    surname_entry.delete(0, END)
+    street_entry.delete(0, END)
+    home_number_entry.delete(0, END)
+    city_entry.delete(0, END)
+    zipcode_entry.delete(0, END)
+    adress_email_entry.delete(0, END)
+    phone_number_entry.delete(0, END)
 def main():
+    global name_entry
+    global second_name_entry
+    global surname_entry
+    global street_entry
+    global home_number_entry
+    global city_entry
+    global zipcode_entry
+    global adress_email_entry
+    global phone_number_entry
+
     # root Option
     root = Tk()
     root.title("Address")
-    root.iconbitmap("icona.ico")
+    #root.iconbitmap("icona.ico")
     root.config(padx=3,pady=2)
     logo1 = ImageTk.PhotoImage(Image.open("logo1.png"))
     logo2 = ImageTk.PhotoImage(Image.open("logo2.png"))
@@ -48,7 +70,7 @@ def main():
     regulamin= Checkbutton(root, text="Akceptuje regulamin", variable=var)
 
     submit_btn=Button(root, text="Submit")
-    clear_btn=Button(root, text="Clear")
+    clear_btn=Button(root, text="Clear", command=clear)
     # Element Position
     logo_frame.grid(row=1, columnspan=2)
     head.grid(row=0, column=2, columnspan=4)
