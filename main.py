@@ -1,3 +1,4 @@
+import sqlite3
 from tkinter import *
 from PIL import ImageTk, Image
 def clear():
@@ -23,6 +24,22 @@ def main():
     global adress_email_entry
     global phone_number_entry
 
+
+    conn=sqlite3.connect('addresses.db')
+    c=conn.cursor()
+    c.execute("""CREATE TABLE addresses (
+    name text,
+    second_name text,
+    surname text,
+    street text,
+    home_number text,
+    city text,
+    zipcode text,
+    adress_email text,
+    phone_number text)""")
+    conn.commit()
+    conn.close()
+
     # root Option
     root = Tk()
     root.title("Address")
@@ -41,7 +58,6 @@ def main():
     mainMenu.add_cascade(label="Edit", menu=edit_menu)
 
     # Add elements
-
     logo_frame = LabelFrame(root)
     head = Label(logo_frame, text=" Adress Book", font=("Comic Sans MS", 20, "bold"))
     logo0_label= Label(logo_frame, image=logo1)
@@ -67,8 +83,9 @@ def main():
     phone_number_label = Label(root, text="Numer Telefonu")
     phone_number_entry = Entry(root)
     var=IntVar()
+    # Regulamin
     regulamin= Checkbutton(root, text="Akceptuje regulamin", variable=var)
-
+    regulamin.deselect()
     submit_btn=Button(root, text="Submit")
     clear_btn=Button(root, text="Clear", command=clear)
     # Element Position
