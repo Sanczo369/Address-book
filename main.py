@@ -20,7 +20,14 @@ def submit():
                })
     conn.commit()
     conn.close()
-
+def query():
+    conn = sqlite3.connect('addresses.db')
+    c = conn.cursor()
+    c.execute("SELECT *, oid FROM addresses")
+    records = c.fetchall()
+    print(records)
+    conn.commit()
+    conn.close()
 def clear():
     name_entry.delete(0, END)
     second_name_entry.delete(0, END)
@@ -112,7 +119,7 @@ def main():
     id_entry = Entry(root)
     edit_btn=Button(root, text="Edit",width=19)
     delete_btn=Button(root, text="Delete",width=19)
-    show_btn=Button(root, text="Show", width=42)
+    show_btn=Button(root, text="Show", width=42, command=query)
 
     # Element Position
     logo_frame.grid(row=1, columnspan=2)
