@@ -1,6 +1,26 @@
 import sqlite3
 from tkinter import *
 from PIL import ImageTk, Image
+
+
+
+def submit():
+    conn = sqlite3.connect('addresses.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO addresses VALUES(:name, :second_name, :surname, :street, :home_number, :city, :zipcode, :adress_email, :phone_number)",
+              {'name': name_entry.get(),
+               'second_name': second_name_entry.get(),
+               'surname': surname_entry.get(),
+               'street': street_entry.get(),
+               'home_number': home_number_entry.get(),
+               'city': city_entry.get(),
+               'zipcode': zipcode_entry.get(),
+               'adress_email': adress_email_entry.get(),
+               'phone_number': phone_number_entry.get()
+               })
+    conn.commit()
+    conn.close()
+
 def clear():
     name_entry.delete(0, END)
     second_name_entry.delete(0, END)
@@ -24,21 +44,21 @@ def main():
     global adress_email_entry
     global phone_number_entry
 
-
-    conn=sqlite3.connect('addresses.db')
-    c=conn.cursor()
-    c.execute("""CREATE TABLE addresses (
-    name text,
-    second_name text,
-    surname text,
-    street text,
-    home_number text,
-    city text,
-    zipcode text,
-    adress_email text,
-    phone_number text)""")
-    conn.commit()
-    conn.close()
+    # create Table with addresses in addresses.db file
+    # conn=sqlite3.connect('address.db')
+    # c=conn.cursor()
+    # c.execute("""CREATE TABLE addresses (
+    # name text,
+    # second_name text,
+    # surname text,
+    # street text,
+    # home_number text,
+    # city text,
+    # zipcode text,
+    # adress_email text,
+    # phone_number text)""")
+    # conn.commit()
+    # conn.close()
 
     # root Option
     root = Tk()
@@ -86,7 +106,7 @@ def main():
     # Regulamin
     regulamin= Checkbutton(root, text="Akceptuje regulamin", variable=var)
     regulamin.deselect()
-    submit_btn=Button(root, text="Submit")
+    submit_btn=Button(root, text="Submit", command=submit)
     clear_btn=Button(root, text="Clear", command=clear)
     # Element Position
     logo_frame.grid(row=1, columnspan=2)
