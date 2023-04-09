@@ -75,9 +75,9 @@ def main():
     phone_number_entry = Entry(root)
     var=IntVar()
     # Regulamin
-    regulamin= Checkbutton(root, text="Akceptuje regulamin", variable=var)
+    regulamin= Checkbutton(root, text="Akceptuje regulamin", variable=var, onvalue=1, offvalue=0)
     regulamin.deselect()
-    submit_btn=Button(root, text="Submit",width=19, command=lambda:func.submit(name_entry,second_name_entry,surname_entry,street_entry,home_number_entry,city_entry,zipcode_entry,adress_email_entry,phone_number_entry))
+    submit_btn=Button(root, text="Submit",width=19, command=lambda:func.submit(var,name_entry,second_name_entry,surname_entry,street_entry,home_number_entry,city_entry,zipcode_entry,adress_email_entry,phone_number_entry))
     clear_btn=Button(root, text="Clear",width=19, command=lambda:func.clear(name_entry,second_name_entry,surname_entry,street_entry,home_number_entry,city_entry,zipcode_entry,adress_email_entry,phone_number_entry))
     id_label = Label(root, text="ID:")
     id_entry = Entry(root)

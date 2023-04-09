@@ -1,6 +1,7 @@
 import sqlite3
 from tkinter import *
 
+
 def query(root):
     global print_records
     conn = sqlite3.connect('addresses.db')
@@ -14,6 +15,7 @@ def query(root):
     quary_label.grid(row=16, columnspan=2)
     conn.commit()
     conn.close()
+
 
 def delete(id_entry):
     conn = sqlite3.connect('addresses.db')
@@ -132,22 +134,23 @@ def edit(id_entry):
     conn.commit()
     conn.close()
 
-def submit(name_entry,second_name_entry,surname_entry,street_entry,home_number_entry,city_entry,zipcode_entry,adress_email_entry,phone_number_entry):
-    conn = sqlite3.connect('addresses.db')
-    c = conn.cursor()
-    c.execute("INSERT INTO addresses VALUES(:name, :second_name, :surname, :street, :home_number, :city, :zipcode, :adress_email, :phone_number)",
-              {'name': name_entry.get(),
-               'second_name': second_name_entry.get(),
-               'surname': surname_entry.get(),
-               'street': street_entry.get(),
-               'home_number': home_number_entry.get(),
-               'city': city_entry.get(),
-               'zipcode': zipcode_entry.get(),
-               'adress_email': adress_email_entry.get(),
-               'phone_number': phone_number_entry.get()
-               })
-    conn.commit()
-    conn.close()
+def submit(var,name_entry,second_name_entry,surname_entry,street_entry,home_number_entry,city_entry,zipcode_entry,adress_email_entry,phone_number_entry):
+    if var.get()==1:
+        conn = sqlite3.connect('addresses.db')
+        c = conn.cursor()
+        c.execute("INSERT INTO addresses VALUES(:name, :second_name, :surname, :street, :home_number, :city, :zipcode, :adress_email, :phone_number)",
+                  {'name': name_entry.get(),
+                   'second_name': second_name_entry.get(),
+                   'surname': surname_entry.get(),
+                   'street': street_entry.get(),
+                   'home_number': home_number_entry.get(),
+                   'city': city_entry.get(),
+                   'zipcode': zipcode_entry.get(),
+                   'adress_email': adress_email_entry.get(),
+                   'phone_number': phone_number_entry.get()
+                   })
+        conn.commit()
+        conn.close()
 def clear(name_entry,second_name_entry,surname_entry,street_entry,home_number_entry,city_entry,zipcode_entry,adress_email_entry,phone_number_entry):
     name_entry.delete(0, END)
     second_name_entry.delete(0, END)
