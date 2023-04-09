@@ -17,7 +17,48 @@ def submit():
                })
     conn.commit()
     conn.close()
+def save():
+    conn = sqlite3.connect('addresses.db')
+    c = conn.cursor()
+    record_id = id_entry.get()
+    c.execute("""UPDATE addresses SET
+    name=:name,
+    second_name=:second_name,
+    surname=:surname,
+    street=:street,
+    home_number=:home_number,
+    city=:city,
+    zipcode=:zipcode,
+    adress_email=:adress_email,
+    phone_number=:phone_number
+    WHERE oid=:oid""",
+        {'name': name_entry_editor.get(),
+         'second_name': second_name_entry_editor.get(),
+         'surname': surname_entry_editor.get(),
+         'street': street_entry_editor.get(),
+         'home_number': home_number_entry_editor.get(),
+         'city': city_entry_editor.get(),
+         'zipcode': zipcode_entry_editor.get(),
+         'adress_email': adress_email_entry_editor.get(),
+         'phone_number': phone_number_entry_editor.get(),
+         'oid': record_id
+        })
+
+    conn.commit()
+    conn.close()
+    editor.destroy()
 def edit():
+    global editor
+    global save
+    global name_entry_editor
+    global second_name_entry_editor
+    global surname_entry_editor
+    global street_entry_editor
+    global home_number_entry_editor
+    global city_entry_editor
+    global zipcode_entry_editor
+    global adress_email_entry_editor
+    global phone_number_entry_editor
     editor= Tk()
     editor.title="Update"
     editor.geometry('')
@@ -47,7 +88,7 @@ def edit():
     adress_email_entry_editor = Entry(editor)
     phone_number_label_editor = Label(editor, text="Numer Telefonu")
     phone_number_entry_editor = Entry(editor)
-    save=Button(editor, text="Save", width=40)
+    save=Button(editor, text="Save", width=40, command=save)
 
     # Element Position
     name_label_editor.grid(row=1, column=0)
