@@ -1,9 +1,6 @@
 import sqlite3
 from tkinter import *
 from PIL import ImageTk, Image
-
-
-
 def submit():
     conn = sqlite3.connect('addresses.db')
     c = conn.cursor()
@@ -21,13 +18,16 @@ def submit():
     conn.commit()
     conn.close()
 def query():
+    global print_records
     conn = sqlite3.connect('addresses.db')
     c = conn.cursor()
     c.execute("SELECT *, oid FROM addresses")
     records = c.fetchall()
-
+    print_records = ""
     for record in records:
-        print_records += str(record[0])+" "
+        print_records += str(record[0])+" "+str(record[1])+" "+str(record[len(record)-1])+"\n"
+    quary_label = Label(root, text=print_records)
+    quary_label.grid(row=16, columnspan=2)
     conn.commit()
     conn.close()
 def clear():
@@ -42,7 +42,15 @@ def clear():
     zipcode_entry.delete(0, END)
     adress_email_entry.delete(0, END)
     phone_number_entry.delete(0, END)
+def delete():
+    conn = sqlite3.connect('addresses.db')
+    c = conn.cursor()
+    c.execute("DELETE from addresses WHERE oid="+id_entry.get())
+    id_entry.delete(0,END)
+    conn.commit()
+    conn.close()
 def main():
+    global root
     global name_entry
     global second_name_entry
     global surname_entry
@@ -52,7 +60,7 @@ def main():
     global zipcode_entry
     global adress_email_entry
     global phone_number_entry
-    global print_records
+    global id_entry
     # create Table with addresses in addresses.db file
     # conn=sqlite3.connect('address.db')
     # c=conn.cursor()
@@ -85,7 +93,7 @@ def main():
     mainMenu.add_cascade(label="File", menu=file_menu)
     edit_menu = Menu(mainMenu)
     mainMenu.add_cascade(label="Edit", menu=edit_menu)
-    print_records=""
+
     # Add elements
     logo_frame = LabelFrame(root)
     head = Label(logo_frame, text=" Adress Book", font=("Comic Sans MS", 20, "bold"))
@@ -120,9 +128,9 @@ def main():
     id_label = Label(root, text="ID:")
     id_entry = Entry(root)
     edit_btn=Button(root, text="Edit",width=19)
-    delete_btn=Button(root, text="Delete",width=19)
+    delete_btn=Button(root, text="Delete",width=19, command=delete)
     show_btn=Button(root, text="Show", width=42, command=query)
-    quary_label = Label(root, text=print_records)
+
 
     # Element Position
     logo_frame.grid(row=1, columnspan=2)
@@ -159,7 +167,7 @@ def main():
     edit_btn.grid(row=14, column=0)
     delete_btn.grid(row=14, column=1)
     show_btn.grid(row=15, columnspan=2)
-    quary_label.grid(row=16, columnspan=2)
+
 
 
 
