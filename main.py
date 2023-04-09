@@ -47,6 +47,7 @@ def edit():
     adress_email_entry_editor = Entry(editor)
     phone_number_label_editor = Label(editor, text="Numer Telefonu")
     phone_number_entry_editor = Entry(editor)
+    save=Button(editor, text="Save", width=40)
 
     # Element Position
     name_label_editor.grid(row=1, column=0)
@@ -67,6 +68,7 @@ def edit():
     adress_email_entry_editor.grid(row=8, column=1)
     phone_number_label_editor.grid(row=9, column=0)
     phone_number_entry_editor.grid(row=9, column=1)
+    save.grid(row=10, columnspan=2)
 
     for record in records:
         name_entry_editor.insert(0,record[0])
