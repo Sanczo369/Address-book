@@ -21,6 +21,13 @@ def edit():
     editor= Tk()
     editor.title="Update"
     editor.geometry('')
+
+    conn = sqlite3.connect('addresses.db')
+    c = conn.cursor()
+    record_id = id_entry.get()
+    c.execute("SELECT * FROM addresses WHERE oid="+record_id)
+    records=c.fetchall()
+
     # Add elements
     name_label_editor = Label(editor, text="Imie")
     name_entry_editor = Entry(editor)
@@ -60,6 +67,20 @@ def edit():
     adress_email_entry_editor.grid(row=8, column=1)
     phone_number_label_editor.grid(row=9, column=0)
     phone_number_entry_editor.grid(row=9, column=1)
+
+    for record in records:
+        name_entry_editor.insert(0,record[0])
+        second_name_entry_editor.insert(0,record[1])
+        surname_entry_editor.insert(0,record[2])
+        street_entry_editor.insert(0,record[3])
+        home_number_entry_editor.insert(0,record[4])
+        city_entry_editor.insert(0,record[5])
+        zipcode_entry_editor.insert(0,record[6])
+        adress_email_entry_editor.insert(0,record[7])
+        phone_number_entry_editor.insert(0,record[8])
+
+    conn.commit()
+    conn.close()
 def query():
     global print_records
     conn = sqlite3.connect('addresses.db')
