@@ -30,8 +30,3 @@ plik func.py zawiera funkcje
 - delete - Usuwa kontakt na podstawie ID
 - edit - Wyświetla dane Kontaktu możliwe do edycji
 - save - Zapisuje zmiany w wybranym Kontaktcie
-   
-
-def submit(
-
-Footer
