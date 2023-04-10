@@ -1,7 +1,7 @@
-import sqlite3
 from tkinter import *
 from PIL import ImageTk, Image
 import func
+
 
 def main():
     global root
@@ -34,27 +34,27 @@ def main():
     # root Option
     root = Tk()
     root.title("Address")
-    #root.iconbitmap("icona.ico")
-    root.config(padx=3,pady=2)
+    # root.iconbitmap("icona.ico")
+    root.config(padx=3, pady=2)
     logo1 = ImageTk.PhotoImage(Image.open("logo1.png"))
     logo2 = ImageTk.PhotoImage(Image.open("logo2.png"))
     logo3 = ImageTk.PhotoImage(Image.open("logo3.png"))
     logo4 = ImageTk.PhotoImage(Image.open("logo4.png"))
     # Window Menu
-    mainMenu = Menu()
-    root.config(menu=mainMenu)
-    file_menu = Menu(mainMenu)
-    mainMenu.add_cascade(label="File", menu=file_menu)
-    edit_menu = Menu(mainMenu)
-    mainMenu.add_cascade(label="Edit", menu=edit_menu)
+    main_menu = Menu()
+    root.config(menu=main_menu)
+    file_menu = Menu(main_menu)
+    main_menu.add_cascade(label="File", menu=file_menu)
+    edit_menu = Menu(main_menu)
+    main_menu.add_cascade(label="Edit", menu=edit_menu)
 
     # Add elements
     logo_frame = LabelFrame(root)
     head = Label(logo_frame, text=" Adress Book", font=("Comic Sans MS", 20, "bold"))
-    logo0_label= Label(logo_frame, image=logo1)
-    logo1_label= Label(logo_frame, image=logo2)
-    logo2_label= Label(logo_frame, image=logo3)
-    logo3_label= Label(logo_frame, image=logo4)
+    logo0_label = Label(logo_frame, image=logo1)
+    logo1_label = Label(logo_frame, image=logo2)
+    logo2_label = Label(logo_frame, image=logo3)
+    logo3_label = Label(logo_frame, image=logo4)
     name_label = Label(root, text="Imie")
     name_entry = Entry(root)
     second_name_label = Label(root, text="Drugie Imie")
@@ -73,20 +73,18 @@ def main():
     adress_email_entry = Entry(root)
     phone_number_label = Label(root, text="Numer Telefonu")
     phone_number_entry = Entry(root)
-    var=IntVar()
+    var = IntVar()
     # Regulamin
-    regulamin= Checkbutton(root, text="Akceptuje regulamin", variable=var, onvalue=1, offvalue=0)
+    regulamin = Checkbutton(root, text="Akceptuje regulamin", variable=var, onvalue=1, offvalue=0)
     regulamin.deselect()
-    submit_btn=Button(root, text="Submit",width=19, command=lambda:func.submit(var,name_entry,second_name_entry,surname_entry,street_entry,home_number_entry,city_entry,zipcode_entry,adress_email_entry,phone_number_entry))
-    clear_btn=Button(root, text="Clear",width=19, command=lambda:func.clear(name_entry,second_name_entry,surname_entry,street_entry,home_number_entry,city_entry,zipcode_entry,adress_email_entry,phone_number_entry))
+    submit_btn = Button(root,bg="green", fg="white", text="Submit", width=19, command=lambda: func.submit(var, name_entry, second_name_entry, surname_entry, street_entry, home_number_entry, city_entry, zipcode_entry, adress_email_entry, phone_number_entry))
+    clear_btn = Button(root, text="Clear", width=19, command=lambda: func.clear(name_entry, second_name_entry, surname_entry, street_entry, home_number_entry, city_entry, zipcode_entry, adress_email_entry, phone_number_entry))
     id_label = Label(root, text="ID:")
     id_entry = Entry(root)
-    edit_btn=Button(root, text="Edit",width=19, command=lambda:func.edit(id_entry))
-    delete_btn=Button(root, text="Delete",width=19, command=lambda:func.delete(id_entry))
-    show_btn=Button(root, text="Show", width=42, command=lambda:func.query(root))
-
-
-    # Element Position
+    edit_btn = Button(root, text="Edit", width=19, command=lambda: func.edit(id_entry))
+    delete_btn = Button(root, bg="red", text="Delete", fg="white", width=19, command=lambda: func.delete(id_entry))
+    show_btn = Button(root, text="Show", width=42, command=lambda: func.query(root))
+# Element Position
     logo_frame.grid(row=1, columnspan=2)
     head.grid(row=0, column=2, columnspan=4)
     logo0_label.grid(row=0, column=0)
@@ -114,8 +112,8 @@ def main():
     phone_number_entry.grid(row=10, column=1)
     regulamin.grid(row=11, columnspan=2)
 
-    submit_btn.grid(row=12, column=0)
-    clear_btn.grid(row=12, column=1)
+    clear_btn.grid(row=12, column=0)
+    submit_btn.grid(row=12, column=1)
     id_label.grid(row=13, column=0)
     id_entry.grid(row=13, column=1)
     edit_btn.grid(row=14, column=0)

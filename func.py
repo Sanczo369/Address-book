@@ -21,9 +21,10 @@ def delete(id_entry):
     conn = sqlite3.connect('addresses.db')
     c = conn.cursor()
     c.execute("DELETE from addresses WHERE oid="+id_entry.get())
-    id_entry.delete(0,END)
+    id_entry.delete(0, END)
     conn.commit()
     conn.close()
+
 
 def save(id_entry):
     conn = sqlite3.connect('addresses.db')
@@ -49,12 +50,12 @@ def save(id_entry):
          'zipcode': zipcode_entry_editor.get(),
          'adress_email': adress_email_entry_editor.get(),
          'phone_number': phone_number_entry_editor.get(),
-         'oid': record_id
-        })
+         'oid': record_id})
 
     conn.commit()
     conn.close()
     editor.destroy()
+
 
 def edit(id_entry):
     global editor
@@ -68,15 +69,15 @@ def edit(id_entry):
     global zipcode_entry_editor
     global adress_email_entry_editor
     global phone_number_entry_editor
-    editor= Tk()
-    editor.title="Update"
+    editor = Tk()
+    editor.title = "Update"
     editor.geometry('')
 
     conn = sqlite3.connect('addresses.db')
     c = conn.cursor()
     record_id = id_entry.get()
     c.execute("SELECT * FROM addresses WHERE oid="+record_id)
-    records=c.fetchall()
+    records = c.fetchall()
 
     # Add elements
     name_label_editor = Label(editor, text="Imie")
@@ -97,7 +98,7 @@ def edit(id_entry):
     adress_email_entry_editor = Entry(editor)
     phone_number_label_editor = Label(editor, text="Numer Telefonu")
     phone_number_entry_editor = Entry(editor)
-    save_btn= Button(editor, text="Save", width=40, command=lambda:save(id_entry))
+    save_btn = Button(editor, text="Save", width=40, command=lambda: save(id_entry))
 
     # Element Position
     name_label_editor.grid(row=1, column=0)
@@ -121,21 +122,22 @@ def edit(id_entry):
     save_btn.grid(row=10, columnspan=2)
 
     for record in records:
-        name_entry_editor.insert(0,record[0])
-        second_name_entry_editor.insert(0,record[1])
-        surname_entry_editor.insert(0,record[2])
-        street_entry_editor.insert(0,record[3])
-        home_number_entry_editor.insert(0,record[4])
-        city_entry_editor.insert(0,record[5])
-        zipcode_entry_editor.insert(0,record[6])
-        adress_email_entry_editor.insert(0,record[7])
-        phone_number_entry_editor.insert(0,record[8])
+        name_entry_editor.insert(0, record[0])
+        second_name_entry_editor.insert(0, record[1])
+        surname_entry_editor.insert(0, record[2])
+        street_entry_editor.insert(0, record[3])
+        home_number_entry_editor.insert(0, record[4])
+        city_entry_editor.insert(0, record[5])
+        zipcode_entry_editor.insert(0, record[6])
+        adress_email_entry_editor.insert(0, record[7])
+        phone_number_entry_editor.insert(0, record[8])
 
     conn.commit()
     conn.close()
 
-def submit(var,name_entry,second_name_entry,surname_entry,street_entry,home_number_entry,city_entry,zipcode_entry,adress_email_entry,phone_number_entry):
-    if var.get()==1:
+
+def submit(var, name_entry, second_name_entry, surname_entry, street_entry, home_number_entry, city_entry, zipcode_entry, adress_email_entry, phone_number_entry):
+    if var.get() == 1:
         conn = sqlite3.connect('addresses.db')
         c = conn.cursor()
         c.execute("INSERT INTO addresses VALUES(:name, :second_name, :surname, :street, :home_number, :city, :zipcode, :adress_email, :phone_number)",
@@ -151,7 +153,9 @@ def submit(var,name_entry,second_name_entry,surname_entry,street_entry,home_numb
                    })
         conn.commit()
         conn.close()
-def clear(name_entry,second_name_entry,surname_entry,street_entry,home_number_entry,city_entry,zipcode_entry,adress_email_entry,phone_number_entry):
+
+
+def clear(name_entry, second_name_entry, surname_entry, street_entry, home_number_entry, city_entry, zipcode_entry, adress_email_entry, phone_number_entry):
     name_entry.delete(0, END)
     second_name_entry.delete(0, END)
     surname_entry.delete(0, END)
